@@ -56,15 +56,18 @@ def editRestaurant(restaurant_id):
 @app.route('/restaurants/<int:restaurant_id>/delete', methods=['GET', 'POST'])
 def deleteRestaurant(restaurant_id):
 	if request.method == 'POST':
-		#if request.radio[deleteSelection] == "yes":
-		print str(request.form)
-		for i in range(len(restaurants)):
-			if restaurants[i]['id'] == str(restaurant_id):
-				restaurants.pop(i)
-				return redirect(url_for('showRestaurants'))
-		else:
+		radioButtonAnswer = request.form.getlist('deleteSelection')
+		print radioButtonAnswer
+		print type(radioButtonAnswer[0])
+		if radioButtonAnswer[0] == u'no':
+			print "radioButtonAnswer = no"
 			return redirect(url_for('showRestaurants'))
-
+		else:
+			print "radioButtonAnswer = yes"
+			for i in range(len(restaurants)):
+				if restaurants[i]['id'] == str(restaurant_id):
+					restaurants.pop(i)
+					return redirect(url_for('showRestaurants'))
 	else: 
 		return render_template('deleteRestaurant.html', restaurant_id=restaurant_id)
 
