@@ -1,0 +1,42 @@
+<html>
+<body>
+	<h1>Here is the menu for "{{restaurant['name']}}"</h1>
+	<h2>Entrees</h2>
+	{%for item in items%}
+		{%if item['restaurant_id']==restaurant_id and item['course'] == 'Entree'%}
+			{{item['name']}}
+			</br>
+			{{item['description']}}
+			</br>
+			{{item['price']}}
+			</br>
+			</br>
+		{%endif%}
+	{%endfor%}
+	<h2>Desserts</h2>
+	{%for item in items%}
+		{%if item['restaurant_id']==restaurant_id and item['course'] == 'Dessert'%}
+			{{item['name']}}
+			</br>
+			{{item['description']}}
+			</br>
+			{{item['price']}}
+			</br>
+			</br>
+		{%endif%}
+	{%endfor%}
+	<h2>Beverages</h2>
+	{%for item in items%}
+		{%if item['restaurant_id']==restaurant_id and item['course'] == 'Beverage'%}
+			{{item['name']}}
+			</br>
+			{{item['description']}}
+			</br>
+			{{item['price']}}
+			</br>
+			</br>
+		{%endif%}
+	{%endfor%}
+	
+</body>
+</html>

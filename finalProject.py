@@ -10,8 +10,8 @@ restaurants = [{'name': 'The CRUDdy Crab', 'id': '1'}, {'name':'Blue Burgers', '
 
 
 #Fake Menu Items
-items = [ {'name':'Cheese Pizza', 'description':'made with fresh cheese', 'price':'$5.99','course' :'Entree', 'id':'1'}, {'name':'Chocolate Cake','description':'made with Dutch Chocolate', 'price':'$3.99', 'course':'Dessert','id':'2'},{'name':'Caesar Salad', 'description':'with fresh organic vegetables','price':'$5.99', 'course':'Entree','id':'3'},{'name':'Iced Tea', 'description':'with lemon','price':'$.99', 'course':'Beverage','id':'4'},{'name':'Spinach Dip', 'description':'creamy dip with fresh spinach','price':'$1.99', 'course':'Appetizer','id':'5'} ]
-item =  {'name':'Cheese Pizza','description':'made with fresh cheese','price':'$5.99','course' :'Entree'}
+items = [ {'name':'Cheese Pizza', 'description':'made with fresh cheese', 'price':'$5.99','course' :'Entree', 'id':'1', 'restaurant_id': '1'}, {'name':'Chocolate Cake','description':'made with Dutch Chocolate', 'price':'$3.99', 'course':'Dessert','id':'2', 'restaurant_id':'1'},{'name':'Caesar Salad', 'description':'with fresh organic vegetables','price':'$5.99', 'course':'Entree','id':'3', 'restaurant_id':'2'},{'name':'Iced Tea', 'description':'with lemon','price':'$.99', 'course':'Beverage','id':'4', 'restaurant_id':'3'},{'name':'Spinach Dip', 'description':'creamy dip with fresh spinach','price':'$1.99', 'course':'Appetizer','id':'5', 'restaurant_id':'1'} ]
+item =  {'name':'Cheese Pizza','description':'made with fresh cheese','price':'$5.99','course' :'Entree', 'restaurant_id': '1'}
 
 
 
@@ -25,7 +25,7 @@ def showRestaurants():
 #/restaurants/new page 
 @app.route('/restaurants/new/', methods=['GET', 'POST'])
 def newRestaurant():
-
+	print str(items)
 	if request.method == 'POST':
 		restaurant['name'] = request.form['name']
 		restaurant['id'] = str(int(restaurants[len(restaurants)-1]['id']) + 1)
@@ -57,13 +57,9 @@ def editRestaurant(restaurant_id):
 def deleteRestaurant(restaurant_id):
 	if request.method == 'POST':
 		radioButtonAnswer = request.form.getlist('deleteSelection')
-		print radioButtonAnswer
-		print type(radioButtonAnswer[0])
 		if radioButtonAnswer[0] == u'no':
-			print "radioButtonAnswer = no"
 			return redirect(url_for('showRestaurants'))
 		else:
-			print "radioButtonAnswer = yes"
 			for i in range(len(restaurants)):
 				if restaurants[i]['id'] == str(restaurant_id):
 					restaurants.pop(i)
@@ -78,7 +74,12 @@ def deleteRestaurant(restaurant_id):
 @app.route('/restaurants/<int:restaurant_id>/')
 @app.route('/restaurants/<int:restaurant_id>/menu/')
 def showMenu(restaurant_id):
-	return "This page is the menu for restaurant %s" % restaurant_id
+		currentRestaurant = ""
+		for restaurant in restaurants:
+			if restaurant['id'] == str(restaurant_id):
+				currentRestaurant = restaurant
+				print str(restaurant)
+		return render_template('menu.html', restaurant_id=str(restaurant_id), restaurant=currentRestaurant, items=items)
 
 
 #/restaurants/restaurant_id/menu/new
