@@ -25,13 +25,10 @@ def showRestaurants():
 #/restaurants/new page 
 @app.route('/restaurants/new/', methods=['GET', 'POST'])
 def newRestaurant():
-	print str(items)
 	if request.method == 'POST':
 		restaurant['name'] = request.form['name']
 		restaurant['id'] = str(int(restaurants[len(restaurants)-1]['id']) + 1)
 		restaurants.append(restaurant)
-		for i in range(len(restaurants)):
-			print (str(restaurants[i]))
 		return redirect(url_for('showRestaurants'))
 	else: 
 		return render_template('newrestaurant.html')
@@ -78,7 +75,6 @@ def showMenu(restaurant_id):
 		for restaurant in restaurants:
 			if restaurant['id'] == str(restaurant_id):
 				currentRestaurant = restaurant
-				print str(restaurant)
 		return render_template('menu.html', restaurant_id=str(restaurant_id), restaurant=currentRestaurant, items=items)
 
 
@@ -90,7 +86,24 @@ def newMenuItem(restaurant_id):
 #/restaurants/restaurant_id/menu/menu_id/edit 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit', methods=['GET', 'POST'])
 def editMenuItem(restaurant_id, menu_id):
-	return render_template('editmenuitem.html', restaurant_id=restaurant_id, menu_id=menu_id) 
+	currentItem = ""
+	for i in range(len(items)):
+		if items[i]['id'] == str(menu_id):
+			currentItem = items[i]
+			print str(currentItem)
+	if request.method == 'POST':
+		print "Request.method == POST"
+		for i in range(len(items)):
+			if items[i]['id'] == str(restaurant_id):
+				print "Assigning items[i]"
+				items[i]['name'] = request.form['name']
+				print "items[i]['name'] = {0} request.form['name']= {1}".format(items[i]['name'], request.form['name'])
+				items[i]['description'] = request.form['description']
+				items[i]['price'] = request.form['price']
+				items[i]['course'] = request.form['course']
+				return redirect(url_for('showMenu', restaurant_id=restaurant_id))
+	else:			
+		return render_template('editmenuitem.html', restaurant_id=restaurant_id, menu_id=menu_id) 
 
 #/restaurants/restaurant_id/menu/menu_id/new
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/new/', methods=['GET', 'POST'])
