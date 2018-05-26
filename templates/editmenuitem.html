@@ -1,7 +1,7 @@
 <html>
 <body>
 	<h1>Edit Menu Item</h1>
-	<form action='{{url_for("editMenuItem", restaurant_id=restaurant_id, menu_id=menu_id)}}', method='POST'>
+	<form action='{{url_for("editMenuItem", restaurant_id=restaurant_id, menu_id=menu_id)}}', method='POST', id=editform>
 		<p>New Name:</p>
 		<input type='text' size='30' name='name'>
 		<p>New Description:</p>
@@ -9,9 +9,15 @@
 		<p>New Price:</p>
 		<input type='text' size='10' name='price'>
 		<p>New Course Type:</p>
-		<input type='text' size='20', name='course'>
-		<input type='submit' value='edit'>
+		<select name='course' form='editform'>
+			<option value='Appetizer'>Appetizer</option>
+			<option value='Entree'>Entree</option>
+			<option value='Dessert'>Dessert</option>
+			<option value='Beverage'>Beverage</option>
+		</select>
+		<input type='submit' value='Edit'>
 		<a href="{{url_for('showMenu', restaurant_id=restaurant_id)}}">Cancel</a>
 	</form>
+
 </body>
 </html>

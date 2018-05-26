@@ -90,17 +90,14 @@ def editMenuItem(restaurant_id, menu_id):
 	for i in range(len(items)):
 		if items[i]['id'] == str(menu_id):
 			currentItem = items[i]
-			print str(currentItem)
 	if request.method == 'POST':
-		print "Request.method == POST"
 		for i in range(len(items)):
 			if items[i]['id'] == str(restaurant_id):
-				print "Assigning items[i]"
 				items[i]['name'] = request.form['name']
-				print "items[i]['name'] = {0} request.form['name']= {1}".format(items[i]['name'], request.form['name'])
 				items[i]['description'] = request.form['description']
 				items[i]['price'] = request.form['price']
-				items[i]['course'] = request.form['course']
+
+				items[i]['course'] = request.form.get('course')
 				return redirect(url_for('showMenu', restaurant_id=restaurant_id))
 	else:			
 		return render_template('editmenuitem.html', restaurant_id=restaurant_id, menu_id=menu_id) 
