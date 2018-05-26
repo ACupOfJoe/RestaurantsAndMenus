@@ -71,8 +71,8 @@ def deleteRestaurant(restaurant_id):
 
 #/restaurants/restaurant_id
 #/restaurants/restaurant_id/menu 
-@app.route('/restaurants/<int:restaurant_id>/')
-@app.route('/restaurants/<int:restaurant_id>/menu/')
+@app.route('/restaurants/<int:restaurant_id>/', methods=['GET', 'POST'])
+@app.route('/restaurants/<int:restaurant_id>/menu/', methods=['GET', 'POST'])
 def showMenu(restaurant_id):
 		currentRestaurant = ""
 		for restaurant in restaurants:
@@ -83,20 +83,19 @@ def showMenu(restaurant_id):
 
 
 #/restaurants/restaurant_id/menu/new
-@app.route('/restaurants/<int:restaurant_id>/menu/new')
+@app.route('/restaurants/<int:restaurant_id>/menu/new', methods=['GET', 'POST'])
 def newMenuItem(restaurant_id):
 	return "This page is for making a new menu item for restaurant %s" % restaurant_id
 
 #/restaurants/restaurant_id/menu/menu_id/edit 
-@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit')
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit', methods=['GET', 'POST'])
 def editMenuItem(restaurant_id, menu_id):
-	return "This page is for editing menu item %s in restaurant %s" % menu_id, restaurant_id
+	return "This page is for editing menu item {0} in restaurant {1}".format(menu_id, restaurant_id) 
 
 #/restaurants/restaurant_id/menu/menu_id/new
-@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/new/')
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/new/', methods=['GET', 'POST'])
 def deleteMenuItem(restaurant_id, menu_id):
-	return "This page is for deleting menu item %s in restaurant %s" % menu_id, restaurant_id
-
+	return "This page is for deleting menu item {0} in restaurant {1}".format(menu_id, restaurant_id)
 
 
 if __name__ == '__main__':

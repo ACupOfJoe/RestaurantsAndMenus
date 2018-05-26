@@ -10,7 +10,9 @@
 			</br>
 			{{item['price']}}
 			</br>
+			<a href='{{url_for("editMenuItem", restaurant_id=restaurant_id, menu_id=item["id"])}}'>Edit</a>
 			</br>
+			<a href='{{url_for("deleteMenuItem", restaurant_id=restaurant_id, menu_id=item["id"])}}'>Delete</a>
 		{%endif%}
 	{%endfor%}
 	<h2>Desserts</h2>
@@ -22,6 +24,9 @@
 			</br>
 			{{item['price']}}
 			</br>
+			<a href='{{url_for("editMenuItem", restaurant_id=restaurant_id, menu_id=item["id"])}}'>Edit</a>
+			</br>
+			<a href='{{url_for("deleteMenuItem", restaurant_id=restaurant_id, menu_id=item["id"])}}'>Delete</a>
 			</br>
 		{%endif%}
 	{%endfor%}
@@ -34,6 +39,9 @@
 			</br>
 			{{item['price']}}
 			</br>
+			<a href='{{url_for("editMenuItem", restaurant_id=restaurant_id, menu_id=item["id"])}}'>Edit</a>
+			</br>
+			<a href='{{url_for("deleteMenuItem", restaurant_id=restaurant_id, menu_id=item["id"])}}'>Delete</a>
 			</br>
 		{%endif%}
 	{%endfor%}
