@@ -1,14 +1,22 @@
 <html>
 <body>
 	<h1>Create A New Menu Item</h1>
-	<form action='{{url_for("newMenuItem")}}' method='POST'>
+	<form action='{{url_for("newMenuItem", restaurant_id=restaurant_id)}}' method='POST' id=newmenuitemform>
 		<p>Item Name:</p>
 		<input type='text' size='30' name='name'>
 		</br>
+		<p>Item Description:</p>
 		<input type='text' size='180' name='description'>
-		</br> 
+		</br>
+		<p>Item Price:</p> 
 		<input type='text' size='10' name='price'>
 		</br>
+		<p>Course Type:</p>
+		<select name='course' form='newmenuitemform'>
+			<option value='Appetizer'>Appetizer</option>
+			<option value='Entree'>Entree</option>
+			<option value='Dessert'>Dessert</option>
+			<option value='Beverage'>Beverage</option>
 		<input type='submit' value='create'>
 	</form>
 </body>

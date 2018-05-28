@@ -1,15 +1,15 @@
 <html>
 <body>
 	<h1>Edit Menu Item</h1>
-	<form action='{{url_for("editMenuItem", restaurant_id=restaurant_id, menu_id=menu_id)}}', method='POST', id=editform>
+	<form action='{{url_for("editMenuItem", restaurant_id=restaurant_id, menu_id=menu_id)}}', method='POST', id='editmenuitemform'>
 		<p>New Name:</p>
 		<input type='text' size='30' name='name'>
 		<p>New Description:</p>
-		<input type='text' size='240' name='description'>
+		<input type='text' size='100' name='description'>
 		<p>New Price:</p>
 		<input type='text' size='10' name='price'>
 		<p>New Course Type:</p>
-		<select name='course' form='editform'>
+		<select name='course' form='editmenuitemform'>
 			<option value='Appetizer'>Appetizer</option>
 			<option value='Entree'>Entree</option>
 			<option value='Dessert'>Dessert</option>

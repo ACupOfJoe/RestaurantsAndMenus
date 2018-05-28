@@ -1,6 +1,7 @@
 <html>
 <body>
 	<h1>Here is the menu for "{{restaurant['name']}}"</h1>
+
 	<h2>Appetizer</h2>
 	{%for item in items%}
 		{%if item['restaurant_id']==restaurant_id and item['course'] == 'Appetizer'%}
@@ -61,5 +62,6 @@
 		{%endif%}
 	{%endfor%}
 	
+	<a href='{{url_for("newMenuItem", restaurant_id=restaurant_id)}}'>Create A New Item</a>
 </body>
 </html>
