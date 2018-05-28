@@ -122,12 +122,15 @@ def deleteMenuItem(restaurant_id, menu_id):
 		if items[i]['restaurant_id'] == str(restaurant_id) and items[i]['id'] == str(menu_id):
 			currentItem = items[i];
 			print str(currentItem)
-
 	if request.method == 'POST':
-		for i in range(len(items)): 
-			if items[i]['restaurant_id'] == str(restaurant_id) and items[i]['id'] == str(menu_id):
-				items.pop(i)
-				return redirect(url_for('showMenu', restaurant_id=restaurant_id, menu_id=menu_id))
+		radioButtonAnswer = request.form.getlist('deleteitem')
+		if radioButtonAnswer[0] == u'no':
+			return redirect(url_for('showMenu', restaurant_id=restaurant_id, menu_id=menu_id))
+		if radioButtonAnswer[0] == 'yes':
+			for i in range(len(items)): 
+				if items[i]['restaurant_id'] == str(restaurant_id) and items[i]['id'] == str(menu_id):
+					items.pop(i)
+					return redirect(url_for('showMenu', restaurant_id=restaurant_id, menu_id=menu_id))
 	else: 
 		return render_template('deletemenuitem.html', restaurant_id=restaurant_id, menu_id=menu_id, item=currentItem)
 
